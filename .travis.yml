@@ -147,3 +147,14 @@ script:
     if [ "$RUN_TESTS" = true ]; then
       TEST_OUTPUT_ON_FAILURE=1 make test
     fi
+before_deploy:
+  - base=$(basename $PWD)
+  - cd ..
+  - tar -zcf colmap-linux.tar.gz $base
+deploy:
+  # GitHub - Add zip to release
+  - provider: releases
+    api_key: 069ec39098d01097c23a37de6749e90c9b6a17a1
+    file: colmap-linux.tar.gz
+    skip_cleanup: true
+    draft: true
