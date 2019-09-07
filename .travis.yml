@@ -154,7 +154,8 @@ before_deploy:
 deploy:
   # GitHub - Add zip to release
   - provider: releases
-    api_key: 069ec39098d01097c23a37de6749e90c9b6a17a1
+    api_key: 
+      secure: ydfxaGSvm0a+tXE/k1q/zkQr57UpCBezVgJnNqmdWpjr/eu357WoeM87SPEjIWuF0/729zqCtEu7RnO59wBlGgcU9EU4AgMyJn2rpFAnWzLg4J3cz/+Xa25Yc6l5Eak+SbmGBxV/tLo9/xUlhMe8MELLKLmzK2sRO3WsxrTR0/b0+cO4M51PouPufP05i3X786lxWUrfOBMLoEswfbjGwG39Vt8AUlgS3ORNY5k5zsRxEOAjUOJ0ARn0CH17EunSdKlbRZwitbOq22u9Bl6d4PUxV3BJDlD2NgA0Uoy3AtJrVPgcbs7ozVTgq5ITzoWvL5E4Jq6I+R397H2OHcyy/LuLqusg43asbNpjzHQUUdkkfaiaKw3GHA/tyqLJO5aOt/T3Oi+jXlxtaL3j/8W3qrohy30yb5WnpKFRMVrRpsyUcLrYZq81QYUwcns7jY4YJuFDgPdzhCjHSeb08DY3sEtcKCSqpzBTLXufCgy9ofqkTdZXmqtAmn2BHAU4Go6UBTiypuz0PLlENYoqapwabYc0cC+b4ZGwDTZVRxKWRQJ+v/AVV9pTtjZZ7+cJzOgvv+dVC/TzcdUOYZ6BzDXl04B6soV0aMyUYZsdr8x6pOClNVd2t0bVbNOabN/g+XbD1M495RLcnZjVLbVrP3GzMOxziXXozAxg4Bex2i5BLq8=
     file: colmap-linux.tar.gz
     skip_cleanup: true
     draft: true
