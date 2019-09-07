@@ -31,26 +31,6 @@ matrix:
   include:
     - os: linux
       env:
-        - CMAKE_OPTIONS="-DOPENGL_ENABLED=OFF -DCGAL_ENABLED=ON"
-        - RUN_TESTS=true
-        - QT_VERSION=596
-    - os: linux
-      env:
-        - CMAKE_OPTIONS="-DOPENGL_ENABLED=OFF -DCGAL_ENABLED=ON"
-        - RUN_TESTS=true
-        - QT_VERSION=542
-    - os: linux
-      env:
-        - CMAKE_OPTIONS="-DOPENGL_ENABLED=OFF -DCGAL_ENABLED=OFF"
-        - RUN_TESTS=true
-        - QT_VERSION=596
-    - os: linux
-      env:
-        - CMAKE_OPTIONS="-DOPENGL_ENABLED=ON -DCGAL_ENABLED=ON"
-        - RUN_TESTS=false
-        - QT_VERSION=596
-    - os: linux
-      env:
         - CMAKE_OPTIONS="-DOPENGL_ENABLED=OFF -DCGAL_ENABLED=ON -DCUDA_ARCHS=Kepler"
         - RUN_TESTS=false
         - QT_VERSION=596
@@ -61,9 +41,6 @@ matrix:
         - RUN_TESTS=false
         - QT_VERSION=596
         - CUDA_VERSION=8.0.61-1
-    - os: osx
-      env:
-        - CMAKE_OPTIONS="-DIPO_ENABLED=OFF -DQt5_DIR=/usr/local/opt/qt/lib/cmake/Qt5"
 
 cache:
   directories:
@@ -147,15 +124,14 @@ script:
     if [ "$RUN_TESTS" = true ]; then
       TEST_OUTPUT_ON_FAILURE=1 make test
     fi
-before_deploy:
-  - base=$(basename $PWD)
-  - cd ..
-  - tar -zcf colmap-linux.tar.gz $base
+  - make dist
+  
 deploy:
   # GitHub - Add zip to release
   - provider: releases
     api_key: 
       secure: KK8B3lkIsmKv42U+HAeha+D7NZ2s6TKbq/2lN2R6QvTbs2JD6agjtwtsGPUeLwzqeLQZB9GyBgMRphPTUCd3Eif5WB2V6wNJxHBBuTQn13Bt52CODDi3GENtF6GIk+2ISyhzDLbV+DERelAI0MjrBbWtTOqmCBJ3dzPbTq7567fIK6113cf67JVs3PSeH6Fjn3F/Yw8rbYWQKcMw5SwErrTiIDuGXbl04y3/mOos4SWE3FGLtPkWrAT9QqaSG5UWMkXGa9YnRp0+2MUO8SAAsxxZxVWWFMM1YXKIkRqSwWdFLzvBzJh3qogTukUifxgGwRccgI82CTdQDq8nzososx+aSxZcNvYDBAyG0rXFAv09azWwGl9qp6yawd2ROaT0fl99CqNOxVlgicVLfF5givMEwXEQGhMDb85eY7zboKSBGbELLLdLQllWHFOAWackKOX92blDU6nUcohmwhlJGT/DaUbU87AYYGHDXxs39XVirl1N3bHne12VKf8qNhtSl7XN/pWeN04Qa143rGxJymO3UVOzlRWyXhHp25ROWtd+wvdtWMM8jzUdZCP+/KQk7b6ckVNzlxoBCj1f5795RPL9uhZ5bqL54Tma4Jx7a6yOTEfbvcqjE0dPzeM7cld3Wk8OhTiwf8kEgjiu/RUiVW3DDGVRoZKtBwmeLjZMVE4=
-    file: colmap-linux.tar.gz
+    file: release.zip
     skip_cleanup: true
-    draft: true
+    on:
+      all_branches: true
